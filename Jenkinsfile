@@ -2,8 +2,12 @@ pipeline {
   agent any
   environment {
      NAME = "Jenkins"
-     MACHINE = "Linux"
-     JAVA_OPTS="-Xms128m -Xmx512m"
+     MACHINE = """{
+        sh(
+            returnStdout: true,
+            script: 'uname -n'
+        )
+     }"""
   }
   stages {
     stage('Compiling') {   
